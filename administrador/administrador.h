@@ -17,6 +17,10 @@ typedef struct {
 
 }Administrador;
 
+void imprimirAdmin(Administrador* a, int x);
+
+int comprobarAdmin(Administrador* a , char admin[], char contra[], int x);
+
 
 
 

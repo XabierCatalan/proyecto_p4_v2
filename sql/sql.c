@@ -118,9 +118,16 @@ Administrador* cargarAdmins(){
 					if (result == SQLITE_ROW) {
 						Administrador a;
 						a.id_admin = sqlite3_column_int(stmt,0);
-						a.nombre_admin = (char*) sqlite3_column_text(stmt, 1);
-						a.gmail_admin = (char*) sqlite3_column_text(stmt, 2);
-						a.contra_admin = (char*) sqlite3_column_text(stmt, 3);
+
+						a.nombre_admin = malloc(strlen((char*) sqlite3_column_text(stmt, 1)));
+						strcpy(a.nombre_admin,(char*) sqlite3_column_text(stmt, 1));
+
+						a.gmail_admin = malloc(strlen((char*) sqlite3_column_text(stmt, 2)));
+						strcpy(a.gmail_admin,(char*) sqlite3_column_text(stmt, 2));
+
+						a.contra_admin = malloc(strlen((char*) sqlite3_column_text(stmt, 3)));
+						strcpy(a.contra_admin,(char*) sqlite3_column_text(stmt, 3));
+
 
 						admins[contador] = a;
 

@@ -220,6 +220,7 @@ void menuPrincipal(){
 		fflush(stdout);
 		scanf("%s", &opcion);
 
+
 		switch(opcion) {
 			case '1':
 
@@ -228,6 +229,8 @@ void menuPrincipal(){
 //			cargarPeliculas();
 //			printf("%i",contarAdmins());
 //			printf("%i",contarPeliculas());
+			Administrador* administradores = cargarAdmins();
+			imprimirAdmin(administradores, contarAdmins());
 
 
 			break;
@@ -236,6 +239,7 @@ void menuPrincipal(){
 
 				printf("La opcion elegida es 2.\n");
 				menuInsertar();
+
 			break;
 
 			case '3':
