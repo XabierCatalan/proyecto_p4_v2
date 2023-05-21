@@ -9,6 +9,8 @@
 #include <stdio.h>
 #include "../sql/sql.h"
 #include "../pelicula/pelicula.h"
+#include "../administrador/administrador.h"
+#include "menus.h"
 
 void menuInsertar() {
 	char *titulo;
@@ -229,8 +231,10 @@ void menuPrincipal(){
 //			cargarPeliculas();
 //			printf("%i",contarAdmins());
 //			printf("%i",contarPeliculas());
-			Administrador* administradores = cargarAdmins();
-			imprimirAdmin(administradores, contarAdmins());
+//			Administrador* administradores = cargarAdmins();
+
+
+
 
 
 			break;

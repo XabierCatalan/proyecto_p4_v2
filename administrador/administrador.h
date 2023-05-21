@@ -7,6 +7,7 @@
 
 #ifndef ADMINISTRADOR_ADMINISTRADOR_H_
 #define ADMINISTRADOR_ADMINISTRADOR_H_
+#include <stdio.h>
 
 typedef struct {
 	int id_admin;
@@ -19,7 +20,7 @@ typedef struct {
 
 void imprimirAdmin(Administrador* a, int x);
 
-int comprobarAdmin(Administrador* a , char admin[], char contra[], int x);
+int compAdmin(Administrador* a , char admin[], char contra[], int x);
 
 
 

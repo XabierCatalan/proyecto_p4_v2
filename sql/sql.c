@@ -128,7 +128,6 @@ Administrador* cargarAdmins(){
 						a.contra_admin = malloc(strlen((char*) sqlite3_column_text(stmt, 3)));
 						strcpy(a.contra_admin,(char*) sqlite3_column_text(stmt, 3));
 
-
 						admins[contador] = a;
 
 

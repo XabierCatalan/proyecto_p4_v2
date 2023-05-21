@@ -9,6 +9,7 @@
 #define MENUS_MENUS_H_
 #include <stdlib.h>
 #include <stdio.h>
+#include "../administrador/administrador.h"
 
 void menuPrincipal();
 

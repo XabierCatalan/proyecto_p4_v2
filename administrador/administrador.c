@@ -13,4 +13,16 @@ void imprimirAdmin(Administrador* a, int x){
 
 	}
 
+int compAdmin(Administrador* a , char admin[], char contra[], int x){
+	int resultado = 0;
+	for (int var = 0; var < x; ++var) {
+		if(a[var].nombre_admin == admin && a[var].contra_admin == contra){
+			resultado = 1;
+			break;
+		}
+
+	}
+	return resultado;
+}
+
 }
