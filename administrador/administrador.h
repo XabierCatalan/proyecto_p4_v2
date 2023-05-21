@@ -20,7 +20,7 @@ typedef struct {
 
 void imprimirAdmin(Administrador* a, int x);
 
-int compAdmin(Administrador* a , char admin[], char contra[], int x);
+int compAdmin(Administrador* a , char* admin, char* contra, int x);
 
 
 
