@@ -228,10 +228,13 @@ void menuPrincipal(){
 
 			printf("La opcion elegida es 1.\n");
 
-//			cargarPeliculas();
+			Pelicula* peliculas = cargarPeliculas();
+			imprimirPeliculas(peliculas, contarPeliculas());
+
 //			printf("%i",contarAdmins());
 //			printf("%i",contarPeliculas());
 //			Administrador* administradores = cargarAdmins();
+//			imprimirAdmin(administradores, contarAdmins());
 
 
 

@@ -13,7 +13,7 @@
 
 void inicializar();
 
-void cargarPeliculas();
+Pelicula* cargarPeliculas();
 
 int contarAdmins();
 

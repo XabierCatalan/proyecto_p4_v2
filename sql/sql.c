@@ -268,75 +268,102 @@ int contarPeliculas(){
 
 //METODO DE CARGAR PELICULAS
 
-void cargarPeliculas()
+Pelicula* cargarPeliculas()
 {
+
+
 	char sql[] = "select * from Peliculas";
+		Pelicula* pelis = (Pelicula*) malloc(sizeof(Pelicula) * contarPeliculas()) ;
+		int contador = 0;
 
-//	int num_pelis = contarPeliculas();
-//	int cont = 0;
+			sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL) ;
+
+			do {
+						result = sqlite3_step(stmt) ;
+
+
+						if (result == SQLITE_ROW) {
+							Pelicula p;
+							p.id_pelicula = sqlite3_column_int(stmt,0);
+
+							p.titulo = malloc(strlen((char*) sqlite3_column_text(stmt, 1)));
+							strcpy(p.titulo,(char*) sqlite3_column_text(stmt, 1));
+
+							p.cod_genero = sqlite3_column_int(stmt,2);
+
+
+							p.director = malloc(strlen((char*) sqlite3_column_text(stmt, 3)));
+							strcpy(p.director,(char*) sqlite3_column_text(stmt, 3));
+
+							p.cod_formato = sqlite3_column_int(stmt,4);
+
+							p.precio = sqlite3_column_double(stmt, 5);
+
+							p.cantidad = sqlite3_column_int(stmt, 6);
+
+
+
+
+							pelis[contador] = p;
+
+
+							contador++;
+
+
+						}
+					}  while (result == SQLITE_ROW);
+
+
+
+				 sqlite3_finalize(stmt);
+
+				 return pelis;
+
+
+//				 char sql[] = "select * from Administradores";
+//				 	Administrador* admins = (Administrador*) malloc(sizeof(Administrador) * contarAdmins()) ;
+//				 	int contador = 0;
 //
-//	Pelicula *pelis;
-//	pelis = (Pelicula*) malloc(sizeof(Pelicula)*num_pelis);
+//				 		sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL) ;
+//
+//				 		do {
+//				 					result = sqlite3_step(stmt) ;
+//
+//
+//				 					if (result == SQLITE_ROW) {
+//				 						Administrador a;
+//				 						a.id_admin = sqlite3_column_int(stmt,0);
+//
+//				 						a.nombre_admin = malloc(strlen((char*) sqlite3_column_text(stmt, 1)));
+//				 						strcpy(a.nombre_admin,(char*) sqlite3_column_text(stmt, 1));
+//
+//				 						a.gmail_admin = malloc(strlen((char*) sqlite3_column_text(stmt, 2)));
+//				 						strcpy(a.gmail_admin,(char*) sqlite3_column_text(stmt, 2));
+//
+//				 						a.contra_admin = malloc(strlen((char*) sqlite3_column_text(stmt, 3)));
+//				 						strcpy(a.contra_admin,(char*) sqlite3_column_text(stmt, 3));
+//
+//				 						admins[contador] = a;
+//
+//
+//				 						contador++;
+//
+//
+//				 					}
+//				 				}  while (result == SQLITE_ROW);
+//
+//
+//
+//				 			 sqlite3_finalize(stmt);
+//
+//				 			 return admins;
 
-	sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL) ;
 
-	printf("\n");
-	printf("Mostrando peliculas:\n");
-
-	do {
-			result = sqlite3_step(stmt) ;
-
-//			sqlite3_column_int(stmt, 0)
-//			(char*) sqlite3_column_text(stmt, 1)
-
-
-			if (result == SQLITE_ROW) {
-
-//				printf("%i + %s\n", sqlite3_column_int(stmt, 0), (char*) sqlite3_column_text(stmt, 1));
-
-
-
-
-
-				printf("Id_Pelicula: %i | Titulo: %s | Genero: %s | Director: %s | Formato: %s | Precio: %.2f | Cantidad: %i \n ",
-						sqlite3_column_int(stmt,0), (char*) sqlite3_column_text(stmt, 1), buscarGenero(sqlite3_column_int(stmt, 2)),
-						(char*) sqlite3_column_text(stmt, 3), buscarFormato(sqlite3_column_int(stmt, 4)), sqlite3_column_double(stmt, 5),
-						sqlite3_column_int(stmt, 6));
-
-//				printf("Id_ Pelicula: %i | Titulo: %s | Genero: %s | Director: %s | Formato: %s | Precio: %.2f | Cantidad: %i \n",
-//						sqlite3_column_int(stmt, 0), (char*) sqlite3_column_text(stmt, 1), buscarGenero(sqlite3_column_int(stmt, 2))
-//						, (char*) sqlite3_column_text(stmt, 3), buscarFormato(sqlite3_column_int(stmt, 4)), sqlite3_column_double(stmt, 5),
-//						sqlite3_column_int(stmt, 6));
-			}
-		}  while (result == SQLITE_ROW);
-
-	printf("\n");
-
-	 sqlite3_finalize(stmt);
 
 }
 
 
-//void cargarPeliculas()
-//{
-//	char sql[] = "select Titulo_Pelicula from Peliculas";
-//
-//	sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL) ;
-//
-//	printf("\n");
-//	printf("Mostrando peliculas:\n");
-//
-//	do {
-//			result = sqlite3_step(stmt) ;
-//			if (result == SQLITE_ROW) {
-//				printf("%s\n", (char*) sqlite3_column_text(stmt, 0));
-//			}
-//		} while (result == SQLITE_ROW);
-//		printf("\n");
-//
-//		sqlite3_finalize(stmt);
-//
-//}
+
 
 
 //METODODOS DE ACTUALIZAR PELICULAS
@@ -517,7 +544,7 @@ Pelicula* buscarPelicula(int id){
 	p->precio = sqlite3_column_double(stmt, 5);
 	p->cantidad = sqlite3_column_int(stmt, 6);
 
-	imprimirPeliculas(p);
+	imprimirPeliculas(p,1);
 
 	sqlite3_finalize(stmt);
 
@@ -565,7 +592,7 @@ void insertarPelicula(Pelicula p) {
 
 		  } else {
 			 printf("titulo actualizado\n");
-			 imprimirPeliculas(&p);
+			 imprimirPeliculas(&p,1);
 		  }
 
 		  sqlite3_finalize(stmt);
@@ -599,5 +626,73 @@ void borrarPelicula(int id){
 
 
 
+//void cargarPeliculas()
+//{
+//	char sql[] = "select Titulo_Pelicula from Peliculas";
+//
+//	sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL) ;
+//
+//	printf("\n");
+//	printf("Mostrando peliculas:\n");
+//
+//	do {
+//			result = sqlite3_step(stmt) ;
+//			if (result == SQLITE_ROW) {
+//				printf("%s\n", (char*) sqlite3_column_text(stmt, 0));
+//			}
+//		} while (result == SQLITE_ROW);
+//		printf("\n");
+//
+//		sqlite3_finalize(stmt);
+//
+//}
+
+
+
+
+
+//	char sql[] = "select * from Peliculas";
+//
+////	int num_pelis = contarPeliculas();
+////	int cont = 0;
+////
+////	Pelicula *pelis;
+////	pelis = (Pelicula*) malloc(sizeof(Pelicula)*num_pelis);
+//
+//	sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL) ;
+//
+//	printf("\n");
+//	printf("Mostrando peliculas:\n");
+//
+//	do {
+//			result = sqlite3_step(stmt) ;
+//
+////			sqlite3_column_int(stmt, 0)
+////			(char*) sqlite3_column_text(stmt, 1)
+//
+//
+//			if (result == SQLITE_ROW) {
+//
+////				printf("%i + %s\n", sqlite3_column_int(stmt, 0), (char*) sqlite3_column_text(stmt, 1));
+//
+//
+//
+//
+//
+//				printf("Id_Pelicula: %i | Titulo: %s | Genero: %s | Director: %s | Formato: %s | Precio: %.2f | Cantidad: %i \n ",
+//						sqlite3_column_int(stmt,0), (char*) sqlite3_column_text(stmt, 1), buscarGenero(sqlite3_column_int(stmt, 2)),
+//						(char*) sqlite3_column_text(stmt, 3), buscarFormato(sqlite3_column_int(stmt, 4)), sqlite3_column_double(stmt, 5),
+//						sqlite3_column_int(stmt, 6));
+//
+////				printf("Id_ Pelicula: %i | Titulo: %s | Genero: %s | Director: %s | Formato: %s | Precio: %.2f | Cantidad: %i \n",
+////						sqlite3_column_int(stmt, 0), (char*) sqlite3_column_text(stmt, 1), buscarGenero(sqlite3_column_int(stmt, 2))
+////						, (char*) sqlite3_column_text(stmt, 3), buscarFormato(sqlite3_column_int(stmt, 4)), sqlite3_column_double(stmt, 5),
+////						sqlite3_column_int(stmt, 6));
+//			}
+//		}  while (result == SQLITE_ROW);
+//
+//	printf("\n");
+//
+//	 sqlite3_finalize(stmt);
 
 
