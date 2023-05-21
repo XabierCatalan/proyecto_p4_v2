@@ -226,7 +226,7 @@ void menuPrincipal(){
 			printf("La opcion elegida es 1.\n");
 
 //			cargarPeliculas();
-			printf("%i",contarAdmins());
+//			printf("%i",contarAdmins());
 //			printf("%i",contarPeliculas());
 
 
