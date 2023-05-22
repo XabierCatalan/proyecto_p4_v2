@@ -301,6 +301,8 @@ Pelicula* cargarPeliculas()
 
 							p.cantidad = sqlite3_column_int(stmt, 6);
 
+							printf("titulo = %s",p.titulo);
+
 
 
 
