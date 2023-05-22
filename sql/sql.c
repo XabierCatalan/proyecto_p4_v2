@@ -67,10 +67,10 @@ void inicializar()
 {
 //	char** frase =config();
 //	printf("%s", frase[0]);
-	char*rutaBDD=load_config("sql/prueba.txt","rutaBDD");
+	char*rutaBDD_admin =load_config("sql/prueba.txt","rutaBDD_admin");
 
-	    sqlite3_open(rutaBDD, &db);
-	    free(rutaBDD);
+	    sqlite3_open(rutaBDD_admin, &db);
+	    free(rutaBDD_admin);
 
 
 }
