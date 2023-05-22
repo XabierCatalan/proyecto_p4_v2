@@ -282,20 +282,20 @@ Pelicula* cargarPeliculas() {
             Pelicula p;
             p.id_pelicula = sqlite3_column_int(stmt, 0);
 
-            const unsigned char* tituloData = sqlite3_column_text(stmt, 1);
-            if (tituloData != NULL) {
-                p.titulo = malloc(strlen((char*) tituloData) + 1);
-                strcpy(p.titulo, (char*) tituloData);
+            const unsigned char* titulo = sqlite3_column_text(stmt, 1);
+            if (titulo != NULL) {
+                p.titulo = malloc(strlen((char*) titulo) + 1);
+                strcpy(p.titulo, (char*) titulo);
             } else {
                 p.titulo = NULL;
             }
 
             p.cod_genero = sqlite3_column_int(stmt, 2);
 
-            const unsigned char* directorData = sqlite3_column_text(stmt, 3);
-            if (directorData != NULL) {
-                p.director = malloc(strlen((char*) directorData) + 1);
-                strcpy(p.director, (char*) directorData);
+            const unsigned char* director = sqlite3_column_text(stmt, 3);
+            if (director != NULL) {
+                p.director = malloc(strlen((char*) director) + 1);
+                strcpy(p.director, (char*) director);
             } else {
                 p.director = NULL;
             }
@@ -312,48 +312,6 @@ Pelicula* cargarPeliculas() {
     sqlite3_finalize(stmt);
 
     return pelis;
-
-
-
-//				 char sql[] = "select * from Administradores";
-//				 	Administrador* admins = (Administrador*) malloc(sizeof(Administrador) * contarAdmins()) ;
-//				 	int contador = 0;
-//
-//				 		sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL) ;
-//
-//				 		do {
-//				 					result = sqlite3_step(stmt) ;
-//
-//
-//				 					if (result == SQLITE_ROW) {
-//				 						Administrador a;
-//				 						a.id_admin = sqlite3_column_int(stmt,0);
-//
-//				 						a.nombre_admin = malloc(strlen((char*) sqlite3_column_text(stmt, 1)));
-//				 						strcpy(a.nombre_admin,(char*) sqlite3_column_text(stmt, 1));
-//
-//				 						a.gmail_admin = malloc(strlen((char*) sqlite3_column_text(stmt, 2)));
-//				 						strcpy(a.gmail_admin,(char*) sqlite3_column_text(stmt, 2));
-//
-//				 						a.contra_admin = malloc(strlen((char*) sqlite3_column_text(stmt, 3)));
-//				 						strcpy(a.contra_admin,(char*) sqlite3_column_text(stmt, 3));
-//
-//				 						admins[contador] = a;
-//
-//
-//				 						contador++;
-//
-//
-//				 					}
-//				 				}  while (result == SQLITE_ROW);
-//
-//
-//
-//				 			 sqlite3_finalize(stmt);
-//
-//				 			 return admins;
-
-
 
 }
 
