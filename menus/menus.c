@@ -287,19 +287,15 @@ void menuInicioSesion(){
 		printf("Escribe tu nombre: \n");
 		fflush(stdout);
 		scanf("%s", nombreAdmin);
-//		printf("nombre = %s \n", nombreAdmin);
 
 		printf("Escribe tu contraseña: \n");
 		fflush(stdout);
 		scanf("%s", contraAdmin);
-//		printf("contra = %s \n", contraAdmin);
 
 		Administrador* administradores = cargarAdmins();
 
 
 		int r = compAdmin(administradores, nombreAdmin, contraAdmin, contarAdmins());
-
-		printf("r= %i", r);
 		if(r==1){
 			menuPrincipal();
 		} else {

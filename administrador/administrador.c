@@ -17,12 +17,7 @@ void imprimirAdmin(Administrador* a, int x){
 int compAdmin(Administrador* a , char* admin, char* contra, int x){
 	int resultado = 0;
 	for (int var = 0; var < x; ++var) {
-		printf("nombre= %s \n", admin);
-		printf("n= %s  \n", a[var].nombre_admin);
-		printf("contra= %s \n", contra);
-		printf("c= %s \n", a[var].contra_admin);
-
-		if(a[var].nombre_admin == admin && a[var].contra_admin == contra){
+		if(strcmp(a[var].nombre_admin, admin)==0 && strcmp(a[var].contra_admin, contra) == 0){
 			resultado = 1;
 		}
 

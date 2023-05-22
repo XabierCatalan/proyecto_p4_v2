@@ -8,6 +8,7 @@
 #ifndef ADMINISTRADOR_ADMINISTRADOR_H_
 #define ADMINISTRADOR_ADMINISTRADOR_H_
 #include <stdio.h>
+#include <string.h>
 
 typedef struct {
 	int id_admin;
