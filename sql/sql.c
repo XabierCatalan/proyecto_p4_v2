@@ -268,58 +268,51 @@ int contarPeliculas(){
 
 //METODO DE CARGAR PELICULAS
 
-Pelicula* cargarPeliculas()
-{
+Pelicula* cargarPeliculas() {
+    char sql[] = "SELECT * FROM Peliculas";
+    Pelicula* pelis = (Pelicula*) malloc(sizeof(Pelicula) * contarPeliculas());
+    int contador = 0;
 
+    sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
 
-	char sql[] = "select * from Peliculas";
-		Pelicula* pelis = (Pelicula*) malloc(sizeof(Pelicula) * contarPeliculas()) ;
-		int contador = 0;
+    do {
+        result = sqlite3_step(stmt);
 
-			sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL) ;
+        if (result == SQLITE_ROW) {
+            Pelicula p;
+            p.id_pelicula = sqlite3_column_int(stmt, 0);
 
-			do {
-						result = sqlite3_step(stmt) ;
+            const unsigned char* tituloData = sqlite3_column_text(stmt, 1);
+            if (tituloData != NULL) {
+                p.titulo = malloc(strlen((char*) tituloData) + 1);
+                strcpy(p.titulo, (char*) tituloData);
+            } else {
+                p.titulo = NULL;
+            }
 
+            p.cod_genero = sqlite3_column_int(stmt, 2);
 
-						if (result == SQLITE_ROW) {
-							Pelicula p;
-							p.id_pelicula = sqlite3_column_int(stmt,0);
+            const unsigned char* directorData = sqlite3_column_text(stmt, 3);
+            if (directorData != NULL) {
+                p.director = malloc(strlen((char*) directorData) + 1);
+                strcpy(p.director, (char*) directorData);
+            } else {
+                p.director = NULL;
+            }
 
-							p.titulo = malloc(strlen((char*) sqlite3_column_text(stmt, 1)));
-							strcpy(p.titulo,(char*) sqlite3_column_text(stmt, 1));
+            p.cod_formato = sqlite3_column_int(stmt, 4);
+            p.precio = sqlite3_column_double(stmt, 5);
+            p.cantidad = sqlite3_column_int(stmt, 6);
 
-							p.cod_genero = sqlite3_column_int(stmt,2);
+            pelis[contador] = p;
+            contador++;
+        }
+    } while (result == SQLITE_ROW);
 
+    sqlite3_finalize(stmt);
 
-							p.director = malloc(strlen((char*) sqlite3_column_text(stmt, 3)));
-							strcpy(p.director,(char*) sqlite3_column_text(stmt, 3));
+    return pelis;
 
-							p.cod_formato = sqlite3_column_int(stmt,4);
-
-							p.precio = sqlite3_column_double(stmt, 5);
-
-							p.cantidad = sqlite3_column_int(stmt, 6);
-
-							printf("titulo = %s",p.titulo);
-
-
-
-
-							pelis[contador] = p;
-
-
-							contador++;
-
-
-						}
-					}  while (result == SQLITE_ROW);
-
-
-
-				 sqlite3_finalize(stmt);
-
-				 return pelis;
 
 
 //				 char sql[] = "select * from Administradores";
