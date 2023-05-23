@@ -24,7 +24,7 @@
 	    FILE* archivo;
 	    char linea[100];
 	    char* igual;
-	    char buscar2[20];
+	    char buscar2[100];
 	    fflush(stdout);
 	    archivo = fopen(filename, "r");
 
