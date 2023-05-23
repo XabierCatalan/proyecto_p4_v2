@@ -1,1 +1,1 @@
-rutaBDD_admin = sql/BDD Prog.db
+rutaBDD_admin = sql/BDD_Prog.db
