@@ -1,2 +1,2 @@
 rutaBDD_admin = sql/BDD_Prog.db
-rutaBDD_server = ../proyecto_pong/sql/BDD_Prog.db
+rutaBDD_server = ../proyecto_pong/sql/BDD Prog.db
