@@ -290,6 +290,8 @@ void menuInicioSesion(){
 		scanf("%s", contraAdmin);
 
 		Administrador* administradores = cargarAdmins();
+		imprimirAdmin(administradores, contarAdmins());
+
 
 
 		int r = compAdmin(administradores, nombreAdmin, contraAdmin, contarAdmins());
