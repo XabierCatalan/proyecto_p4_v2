@@ -1,2 +1,3 @@
 rutaBDD_admin=sql/BDD_Prog.db
 rutaBDD_server=../videoclub_prog4-master/sql/BDD_Prog.db
+rutaLogger=../videoclub_server/logger.txt
